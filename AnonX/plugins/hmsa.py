@@ -1,16 +1,16 @@
 import asyncio
-import os
-import time
-import requests
-from config import START_IMG_URL
-from pyrogram import filters
+
 import random
-from pyrogram import Client
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup
-from strings.filters import command
-from AnonX import (Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app)
+
 from AnonX import app
-from random import  choice, randint
+
+from pyrogram.types import (InlineKeyboardButton,
+
+                            InlineKeyboardMarkup, Message)
+
+from strings.filters import command
+
+from pyrogram import filters, Client
 
 hmses = {}
 
@@ -28,7 +28,7 @@ def reply_with_link(client, message):
     message.reply_text("\n╢ إضغط لإرسال همسه!\n", reply_markup=reply_markup)
 
 waiting_for_hms = False
-@app.on_message(filters.command("start"))
+@app.on_message(filters.command("alhms"))
 def hms_start(client, message):
   
   if message.text.split(" ", 1)[-1].startswith("hms"):
