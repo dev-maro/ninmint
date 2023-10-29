@@ -62,8 +62,8 @@ async def ihd(client: Client, message: Message):
 @app.on_message(command(["تلاوات", "تلاوة"]))
 async def ihd(client: Client, message: Message):
     rl = random.randint(24,618)
-    url = f"https://t.me/EIEI06//{rl}"
-    await client.send_voice(message.chat.id,url,caption="🥹♥ ¦ تـم اختيـار تلاوة لـك",parse_mode="html",
+    url = f"https://t.me/EIEI06/{rl}"
+    await client.send_voice(message.chat.id,url,caption="🥹♥ ¦ تـم اختيـار تلاوة قرآنيه لـك",parse_mode="html",
     reply_markup=InlineKeyboardMarkup(
             [
                 [
