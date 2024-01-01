@@ -1,4 +1,4 @@
-import asyncio
+  import asyncio
 import os
 import time
 import requests
@@ -8,9 +8,9 @@ from pyrogram import Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup
 from strings.filters import command
 from AnonX import (Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app)
-from AlexaMusic import app
+from AnonX import app
 from asyncio import gather
-from pyrogram.errors import FloodWait
+from pyrogram.errors import FloodWai
 
 @app.on_message(filters.command("رفع منشئ", ""))
 def promote_creator(client, message):
