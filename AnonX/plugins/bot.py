@@ -4,7 +4,7 @@ from AnonX.misc import OWNER
 from pyrogram.types import (Message,InlineKeyboardButton,InlineKeyboardMarkup,CallbackQuery,ChatPrivileges)
 from pyrogram import filters, Client
 from AnonX import app
-from config import *
+
 
 bot_name = {}
 
