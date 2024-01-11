@@ -7,7 +7,6 @@ from AnonX import app
 from config import *
 
 bot_name = {}
-botname = {}
 
 name = "المرتجل"
 
@@ -36,7 +35,7 @@ caesar_responses = [
 ]
 
 @app.on_message(filters.command(["بوت", "البوت"], ""), group=71135)
-async def caesar_bot(client, message):
+async def caesar(client, message):
     global name
     bot_username = (await app.get_me()).username
     bar = random.choice(caesar_responses).format(name=name)
