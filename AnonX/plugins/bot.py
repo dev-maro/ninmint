@@ -1,6 +1,6 @@
 import asyncio
 import random
-from AnonX.misc import SUDOERS
+from AnonX.misc import OWNER
 from pyrogram.types import (Message,InlineKeyboardButton,InlineKeyboardMarkup,CallbackQuery,ChatPrivileges)
 from pyrogram import filters, Client
 from AnonX import app
@@ -11,7 +11,7 @@ botname = {}
 
 name = "المرتجل"
 
-@app.on_message(filters.regex("تعيين اسم البوت")& filters.private & SUDOERS, group=7113)
+@app.on_message(filters.regex("تعيين اسم البوت")& filters.private & OWNER, group=7113)
 async def set_bot_name(client, message):
     global name
     ask = await app.ask(message.chat.id, "ارسل الاسم الجديد", timeout=300)
