@@ -26,7 +26,7 @@ def add_corners(im):
     bigsize = (im.size[0] * 3, im.size[1] * 3)
     mask = Image.new("L", bigsize, 0)
     ImageDraw.Draw(mask).ellipse((0, 0) + bigsize, fill=255)
-    mask = mask.resize(im.size, Image.LANCZOS)
+    mask = mask.resize(im.size, Image.ANTIALIAS)
     mask = ImageChops.darker(mask, im.split()[-1])
     im.putalpha(mask)
 
@@ -100,7 +100,7 @@ async def gen_thumb(videoid, user_id):
         x2 = Xcenter + 250
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
-        logo.thumbnail((520, 520), Image.LANCZOS)
+        logo.thumbnail((520, 520), Image.ANTIALIAS)
         logo.save(f"cache/chop{videoid}.png")
         if not os.path.isfile(f"cache/cropped{videoid}.png"):
             im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
@@ -109,7 +109,7 @@ async def gen_thumb(videoid, user_id):
 
         crop_img = Image.open(f"cache/cropped{videoid}.png")
         logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.LANCZOS)
+        logo.thumbnail((365, 365), Image.ANTIALIAS)
         width = int((1280 - 365) / 2)
         background = Image.open(f"cache/temp{videoid}.png")
         background.paste(logo, (width + 2, 138), mask=logo)
@@ -125,7 +125,7 @@ async def gen_thumb(videoid, user_id):
         try:
             draw.text(
                 (450, 25),
-                f"STARTED PLAYING",
+                f"Almortagel PLAYING",
                 fill="white",
                 stroke_width=3,
                 stroke_fill="grey",
@@ -240,7 +240,7 @@ async def gen_qthumb(videoid, user_id):
         x2 = Xcenter + 250
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
-        logo.thumbnail((520, 520), Image.LANCZOS)
+        logo.thumbnail((520, 520), Image.ANTIALIAS)
         logo.save(f"cache/chop{videoid}.png")
         if not os.path.isfile(f"cache/cropped{videoid}.png"):
             im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
@@ -249,7 +249,7 @@ async def gen_qthumb(videoid, user_id):
 
         crop_img = Image.open(f"cache/cropped{videoid}.png")
         logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.LANCZOS)
+        logo.thumbnail((365, 365), Image.ANTIALIAS)
         width = int((1280 - 365) / 2)
         background = Image.open(f"cache/temp{videoid}.png")
         background.paste(logo, (width + 2, 138), mask=logo)
@@ -301,6 +301,60 @@ async def gen_qthumb(videoid, user_id):
             font=arial,
         )
 
+        try:
+            os.remove(f"cache/thumb{videoid}.png")
+            draw.text(
+            (600, 150),
+            "almortagel",
+            fill="white",
+            stroke_width=2,
+            stroke_fill="white",
+            font=font2,
+        )
+        if para[0]:
+                text_w, text_h = draw.textsize(f"{para[0]}", font=font)
+                draw.text(
+                    ((1280 - text_w) / 2, 530),
+                    f"{para[0]}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+            if para[1]:
+                text_w, text_h = draw.textsize(f"{para[1]}", font=font)
+                draw.text(
+                    ((1280 - text_w) / 2, 580),
+                    f"{para[1]}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+        draw.text(
+            (600, 450),
+            f"Views : {views[:23]}",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (600, 500),
+            f"Duration : {duration[:23]} Mins",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (600, 550),
+            f"Channel : {channel}",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (600, 600),
+            f"DEV : ALMORTAGEL",
+            (255, 255, 255),
+            font=arial,
+        )
         try:
             os.remove(f"cache/thumb{videoid}.png")
         except:
