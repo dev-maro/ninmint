@@ -291,6 +291,16 @@ async def gen_qthumb(videoid, user_id):
                     stroke_fill="white",
                     font=font,
                 )
+                            if para[1]:
+                text_w, text_h = draw.textsize( f"DEV : ALMORTAGEL", font=font)
+                draw.text(
+                    ((1280 - text_w) / 2, 580),
+                    f"DEV : ALMORTAGEL",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
         except:
             pass
         text_w, text_h = draw.textsize(f"Duration: {duration} Mins", font=arial)
@@ -301,60 +311,6 @@ async def gen_qthumb(videoid, user_id):
             font=arial,
         )
 
-        try:
-            os.remove(f"cache/thumb{videoid}.png")
-            draw.text(
-            (600, 150),
-            "almortagel",
-            fill="white",
-            stroke_width=2,
-            stroke_fill="white",
-            font=font2,
-        )
-        if para[0]:
-                text_w, text_h = draw.textsize(f"{para[0]}", font=font)
-                draw.text(
-                    ((1280 - text_w) / 2, 530),
-                    f"{para[0]}",
-                    fill="white",
-                    stroke_width=1,
-                    stroke_fill="white",
-                    font=font,
-                )
-            if para[1]:
-                text_w, text_h = draw.textsize(f"{para[1]}", font=font)
-                draw.text(
-                    ((1280 - text_w) / 2, 580),
-                    f"{para[1]}",
-                    fill="white",
-                    stroke_width=1,
-                    stroke_fill="white",
-                    font=font,
-                )
-        draw.text(
-            (600, 450),
-            f"Views : {views[:23]}",
-            (255, 255, 255),
-            font=arial,
-        )
-        draw.text(
-            (600, 500),
-            f"Duration : {duration[:23]} Mins",
-            (255, 255, 255),
-            font=arial,
-        )
-        draw.text(
-            (600, 550),
-            f"Channel : {channel}",
-            (255, 255, 255),
-            font=arial,
-        )
-        draw.text(
-            (600, 600),
-            f"DEV : ALMORTAGEL",
-            (255, 255, 255),
-            font=arial,
-        )
         try:
             os.remove(f"cache/thumb{videoid}.png")
         except:
