@@ -291,7 +291,7 @@ async def gen_qthumb(videoid, user_id):
                     stroke_fill="white",
                     font=font,
                 )
-                            if para[1]:
+            if para[1]:
                 text_w, text_h = draw.textsize( f"DEV : ALMORTAGEL", font=font)
                 draw.text(
                     ((1280 - text_w) / 2, 580),
