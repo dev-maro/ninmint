@@ -6,7 +6,6 @@ from AnonX import app
 import random
 from strings.filters import command
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.errors import FloodWait
 lokrf = []
 
 @app.on_message(
