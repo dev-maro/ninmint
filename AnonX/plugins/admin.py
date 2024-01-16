@@ -6,14 +6,10 @@ from AnonX import app
 import random
 from strings.filters import command
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import FloodWait
 lokrf = []
 
-@app.on_message(
-     command(["قفل الرفع","تعطيل الرفع"])
-     & filters.group
-
-   
-)
+@app.on_message(command(["قفل الرفع","تعطيل الرفع"])   & filters.group)
 async def iddlock(client:Client, message:Message):
     dev = (OWNER_ID)
     get = await client.get_chat_member(message.chat.id, message.from_user.id)
@@ -34,11 +30,9 @@ async def iddlock(client:Client, message:Message):
     else:
         return await message.reply_text(f"**يا {message.from_user.mention} انت لست مشرفا هنا**")
 
-@app.on_message(
-    command(["فتح الرفع","تفعيل الرفع"])
-    & filters.group
-)
-async def idljjopen(client:Client, message:Message):
+@app.on_message(command(["فتح الرفع","تفعيل الرفع"])
+    & filters.group)
+async def idopen(client:Client, message:Message):
     dev = (OWNER_ID)
 
     get = await client.get_chat_member(message.chat.id, message.from_user.id)
@@ -61,7 +55,7 @@ async def idljjopen(client:Client, message:Message):
 
 klb = []
 
-@app.on_message(filter.command("رفع مميز"))
+@app.on_message(command("رفع مميز"))
 async def rf3nmla(client:Client, message:Message):
 
   if message.reply_to_message.from_user.mention in klb:
@@ -69,14 +63,14 @@ async def rf3nmla(client:Client, message:Message):
   await message.reply_text(f"**تم رفع العضو\n│ \n└ʙʏ : {message.reply_to_message.from_user.mention}\n\n مميز من قبل {message.from_user.mention}**")
 
 
-@app.on_message(filter.command("تنزيل مميز"))
+@app.on_message(command("تنزيل مميز"))
 async def tnzelnmla(client:Client, message:Message):
   if message.reply_to_message.from_user.mention in klb:
     klb.remove(message.reply_to_message.from_user.mention)
   await message.reply_text(f"**تم تنزيل العضو\n│ \n└ʙʏ : {message.reply_to_message.from_user.mention}\n\n من قائمة المميزين  \n\n لعرض القائمه اكتب `المميزين`**")
 
 
-@app.on_message(filter.command("المميزين"))
+@app.on_message(command("المميزين"))
 async def nml(client:Client, message:Message):
   kq = ""
   for n in klb:
@@ -86,21 +80,21 @@ async def nml(client:Client, message:Message):
 zoj = []
 
 
-@app.on_message(filter.command("رفع ادمن"))
+@app.on_message(command("رفع ادمن"))
 async def rf3nmla(client, message:Message):
   if message.reply_to_message.from_user.mention in zoj:
     zoj.append(message.reply_to_message.from_user.mention)
   await message.reply_text(f"**تم رفع العضو\n│ \n : {message.reply_to_message.from_user.mention}\n\n  ادمن من قبل {message.from_user.mention}\n\n لعرض القائمه اكتب `الادمنيه`**")
 
 
-@app.on_message(filter.command("تنزيل ادمن"))
+@app.on_message(command("تنزيل ادمن"))
 async def tnzelnmla(client:Client, message:Message):
   if message.reply_to_message.from_user.mention in zoj:
     zoj.remove(message.reply_to_message.from_user.mention)
   await message.reply_text(f"**تم تنزيل العضو\n│ \n : {message.reply_to_message.from_user.mention}\n\n من قائمة الادمنيه **")
 
 
-@app.on_message(filter.command("الادمنيه"))
+@app.on_message(command("الادمنيه"))
 async def nml(client, message):
   zq = ""
   for n in zoj:
@@ -110,7 +104,7 @@ async def nml(client, message):
 hth =[]
 
 
-@app.on_message(filter.command("رفع مدير"))
+@app.on_message(command("رفع مدير"))
 async def rf3nmla(client, message:Message):
 
   if message.reply_to_message.from_user.mention in hth:
@@ -118,14 +112,14 @@ async def rf3nmla(client, message:Message):
   await message.reply_text(f"**تم رفع العضو\n│ \n : {message.reply_to_message.from_user.mention}\n\n  مدير من قبل {message.from_user.mention}\n\n لعرض القائمه اكتب `المدراء`**")
 
 
-@app.on_message(filter.command("تنزيل مدير"))
+@app.on_message(command("تنزيل مدير"))
 async def tnzelnmla(client:Client, message:Message):
   if message.reply_to_message.from_user.mention in hth:
     hth.remove(message.reply_to_message.from_user.mention)
   await message.reply_text(f"**تم تنزيل العضو\n│ \n : {message.reply_to_message.from_user.mention}\n\n من قائمة المدراء اكتب `المدراء` **")
 
 
-@app.on_message(filter.command("المدراء"))
+@app.on_message(command("المدراء"))
 async def nml(client, message):
   hq = ""
   for n in hth:
@@ -136,21 +130,21 @@ async def nml(client, message):
 zog =[]
 
 
-@app.on_message(filter.command("رفع منشى"))
+@app.on_message(command("رفع منشى"))
 async def rf3nmla(client, message:Message):
   if message.reply_to_message.from_user.mention in zog:
     zog.append(message.reply_to_message.from_user.mention)
   await message.reply_text(f"**تم رفع العضو\n│ \n└ʙʏ : {message.reply_to_message.from_user.mention}\n\n  منشى من قبل : {message.from_user.mention} \n\n لعرض القائمه اكتب `المنشئين`**")
 
 
-@app.on_message(filter.command("تنزيل منشى"))
+@app.on_message(command("تنزيل منشى"))
 async def tnzelnmla(client:Client, message:Message):
   if message.reply_to_message.from_user.mention in zog:
     zog.remove(message.reply_to_message.from_user.mention)
   await message.reply_text(f"**تم تنزيل العضو\n│ \n└ʙʏ : {message.reply_to_message.from_user.mention}\n\n  من قائمه المنشئين **")
 
 
-@app.on_message(filter.command("المنشئين"))
+@app.on_message(command("المنشئين"))
 async def nml(client:Client, message:Message):
   zzq = ""
   for n in zog:
