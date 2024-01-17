@@ -26,7 +26,7 @@ def add_corners(im):
     bigsize = (im.size[0] * 3, im.size[1] * 3)
     mask = Image.new("L", bigsize, 0)
     ImageDraw.Draw(mask).ellipse((0, 0) + bigsize, fill=255)
-    mask = mask.resize(im.size, Image.LANCZOS)
+    mask = mask.resize(im.size, Image.ANTIALIAS)
     mask = ImageChops.darker(mask, im.split()[-1])
     im.putalpha(mask)
 
@@ -90,6 +90,36 @@ async def gen_thumb(videoid, user_id):
         background = enhancer.enhance(0.6)
 
         image3 = changeImageSize(1280, 720, bg)
+        
+            circle = Image.open("assets/almortagel.png")
+
+            # changing circle color
+            im = circle
+            im = im.convert("RGBA")
+            color = make_col()
+
+            data = np.array(im)
+            black, lead, blue, alpha = data.T
+
+            white_areas = (black == 255) & (blue == 255) & (lead == 255)
+            data[..., :-1][white_areas.T] = color
+
+            im2 = Image.fromarray(data)
+            circle = im2
+            # done
+
+            image3 = image1.crop((280, 0, 1000, 720))
+            lum_img = Image.new("L", [720, 720], 0)
+            draw = ImageDraw.Draw(lum_img)
+            draw.pieslice([(0, 0), (720, 720)], 0, 360, fill=255, outline="white")
+            img_arr = np.array(image3)
+            lum_img_arr = np.array(lum_img)
+            final_img_arr = np.dstack((img_arr, lum_img_arr))
+            image3 = Image.fromarray(final_img_arr)
+            image3 = image3.resize((600, 600))
+
+            image2.paste(image3, (50, 70), mask=image3)
+            image2.paste(circle, (0, 0), mask=circle)
         image5 = image3.convert("RGBA")
         Image.alpha_composite(background, image5).save(f"cache/temp{videoid}.png")
 
@@ -100,7 +130,7 @@ async def gen_thumb(videoid, user_id):
         x2 = Xcenter + 250
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
-        logo.thumbnail((520, 520), Image.LANCZOS)
+        logo.thumbnail((520, 520), Image.ANTIALIAS)
         logo.save(f"cache/chop{videoid}.png")
         if not os.path.isfile(f"cache/cropped{videoid}.png"):
             im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
@@ -109,7 +139,7 @@ async def gen_thumb(videoid, user_id):
 
         crop_img = Image.open(f"cache/cropped{videoid}.png")
         logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.LANCZOS)
+        logo.thumbnail((365, 365), Image.ANTIALIAS)
         width = int((1280 - 365) / 2)
         background = Image.open(f"cache/temp{videoid}.png")
         background.paste(logo, (width + 2, 138), mask=logo)
@@ -125,7 +155,7 @@ async def gen_thumb(videoid, user_id):
         try:
             draw.text(
                 (450, 25),
-                f"STARTED PLAYING",
+                f"Almortagel PLAYING",
                 fill="white",
                 stroke_width=3,
                 stroke_fill="grey",
@@ -240,7 +270,7 @@ async def gen_qthumb(videoid, user_id):
         x2 = Xcenter + 250
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
-        logo.thumbnail((520, 520), Image.LANCZOS)
+        logo.thumbnail((520, 520), Image.ANTIALIAS)
         logo.save(f"cache/chop{videoid}.png")
         if not os.path.isfile(f"cache/cropped{videoid}.png"):
             im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
@@ -249,7 +279,7 @@ async def gen_qthumb(videoid, user_id):
 
         crop_img = Image.open(f"cache/cropped{videoid}.png")
         logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.LANCZOS)
+        logo.thumbnail((365, 365), Image.ANTIALIAS)
         width = int((1280 - 365) / 2)
         background = Image.open(f"cache/temp{videoid}.png")
         background.paste(logo, (width + 2, 138), mask=logo)
