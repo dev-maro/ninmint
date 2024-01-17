@@ -1,3 +1,4 @@
+
 import asyncio
 import os
 import random
@@ -125,7 +126,7 @@ async def gen_thumb(videoid):
 
             image4 = ImageDraw.Draw(image2)
             image4.text(
-                (10, 10), "Arnop Music", fill="white", font=font1, align="left"
+                (10, 10), "AnonX Music", fill="white", font=font1, align="left"
             )
             image4.text(
                 (670, 150),
