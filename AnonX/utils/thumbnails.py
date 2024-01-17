@@ -91,7 +91,7 @@ async def gen_thumb(videoid, user_id):
 
         image3 = changeImageSize(1280, 720, bg)
         
-            circle = Image.open(f"assets/almortagel.png")
+            circle = Image.open(f"AnonX/assets/anonx.png")
 
             # changing circle color
             im = circle
